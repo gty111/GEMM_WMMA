@@ -36,10 +36,10 @@ $$
 - 之后同步操作，将share memory中存储的不同warp计算的分块结果累加到C中的分块
 ## [实现代码](https://github.com/gty111/GEMM_WMMA)
 
-- gemm_wmma.cu 实现了warp level 矩阵乘加速（通过WMMA调用tensor core）
-- gemm_bmma.cu 实现了block level 矩阵乘加速  (通过WMMA调用 tensor core)
+- GEMM_wmma 实现了warp level 矩阵乘加速（通过WMMA调用tensor core）
+- GEMM_bmma 实现了block level 矩阵乘加速  (通过WMMA调用 tensor core)
 
-- gemm.cu 对比 WMMA 、 BMMA  和 cutlass 中的basic_gemm运算结果和速度
+- gemm.cu 对比 GEMM_wmma 、 GEMM_bmma  和 cutlass 中的basic_gemm运算结果和速度
 
 ## 运行方法
 
