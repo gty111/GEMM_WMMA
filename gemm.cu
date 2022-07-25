@@ -256,6 +256,8 @@ void GEMM_wmma(int M,int N,int K,TIN *a_in,TIN *b_in,TOUT *c_out){
       <<<GRID_DIM,BLOCK_DIM>>>(a.data,b.data,c.data,
             M_PAD,N_PAD,K_PAD);});
 
+   cudaDeviceSynchronize();//sync for unify memory
+
    copy<TOUT,TGEMMOUT,CUARR2ARR>(M,N,c_out,M_PAD,N_PAD,c);
 }
 
@@ -286,6 +288,8 @@ void GEMM_bmma(int M,int N,int K,TIN *a_in,TIN *b_in,TOUT *c_out){
       <<<GRID_DIM,BLOCK_DIM>>>(a.data,b.data,c.data,
          M_PAD,N_PAD,K_PAD);});
 
+   cudaDeviceSynchronize();//sync for unify memory
+
    copy<TOUT,TGEMMOUT,CUARR2ARR>(M,N,c_out,M_PAD,N_PAD,c);
 }
 
@@ -302,6 +306,8 @@ void GEMM_cutlass(int M,int N,int K,TIN *a_in,TIN *b_in,TOUT *c_out){
 
    Timer("gemm_cutlass", [&]{
       CutlassSgemmNN(M,N,K,1.0,a.data,K,b.data,N,0.0,c.data,N);});
+
+   cudaDeviceSynchronize();//sync for unify memory
 
    copy<TOUT,TOUT,CUARR2ARR>(M,N,c_out,M,N,c);
 }
