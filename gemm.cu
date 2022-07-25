@@ -1,4 +1,6 @@
-// GEMM by tensor core 
+// GEMM compare between bmma wmma cutlass_basic_gemm
+// wmma warp level matrix multiply-accumulate
+// bmma block level matrix multiply-accumulate
 #include "cutlass/gemm/device/gemm.h"
 #include "helper.h"
 #include <mma.h>
@@ -12,7 +14,7 @@ using namespace nvcuda;
 
 #define BLOCK_DIM_DEFAULT 512
 #define WARP_SIZE 32
-//#define DEBUG
+#define TIMES 5 // must greater than 1 to warm up for unify memory
 
 template <typename TIN,typename TOUT,
       int M_TILE,int N_TILE,int K_TILE>
@@ -97,55 +99,43 @@ __global__ void bmma_kernel(TIN *a, TIN *b, TOUT *c,
    }
 }      
 
-template <typename T> struct cuda_vector {
-  T *device_data;
-  std::vector<T> host_data;
-  cuda_vector(size_t n) : host_data(n,0) {
-    cudaMalloc(&device_data, sizeof(T) * n);
+
+//unify memory
+template <typename T> struct cuda_data {
+  T *data;
+
+  cuda_data(size_t n) {
+    cudaMallocManaged(&data, sizeof(T) * n);
+    //init to zero
+    for(long i=0;i<n;i++){
+      data[i] = 0;
+    }
   }
-  ~cuda_vector() { cudaFree(device_data); }
-  void sync_device() {
-    cudaMemcpy(device_data, host_data.data(), sizeof(T) * host_data.size(),
-               cudaMemcpyHostToDevice);
-  }
-  void sync_host() {
-    cudaMemcpy(host_data.data(), device_data, sizeof(T) * host_data.size(),
-               cudaMemcpyDeviceToHost);
-  }
-  void print(int dim) {
-   printf("---------------\n");
-   for(int i=0;i<host_data.size()/dim;i++){
-      for(int j=0;j<dim;j++){
-         std::printf("%4.0f",(float)host_data[i*dim+j]);
-         if(j==dim-1) std::printf("\n");
-         else std::printf(" ");
-      }
-   }
-  }
+  ~cuda_data() { cudaFree(data); }
 };
 
-enum DIR {ARR2VECTOR,VECTOR2ARR};
+enum DIR {ARR2CUARR,CUARR2ARR};
 
-template <typename TARR,typename TVEC,DIR dir>
-void gemm_copy(int ARR_M,int ARR_N,TARR *arr,
-      int VEC_M,int VEC_N,cuda_vector<TVEC> &vec){
-   assert(VEC_M>=ARR_M && VEC_N>=ARR_N);
-   if(dir==ARR2VECTOR){
+template <typename TARR,typename TCUARR,DIR dir>
+void copy(int ARR_M,int ARR_N,TARR *arr,
+      int CUARR_M,int CUARR_N,cuda_data<TCUARR> &cuarr){
+   assert(CUARR_M>=ARR_M && CUARR_N>=ARR_N);
+   if(dir==ARR2CUARR){
       for(int i=0;i<ARR_M;i++)
       for(int j=0;j<ARR_N;j++){
-         vec.host_data[i*VEC_N+j] = arr[i*ARR_N+j];
+         cuarr.data[i*CUARR_N+j] = arr[i*ARR_N+j];
       }
-   }else if(dir==VECTOR2ARR){   
+   }else if(dir==CUARR2ARR){   
       for(int i=0;i<ARR_M;i++){
          for(int j=0;j<ARR_N;j++){
-            arr[i*ARR_N+j] = vec.host_data[i*VEC_N+j];
+            arr[i*ARR_N+j] = cuarr.data[i*CUARR_N+j];
          }
       }
    }else assert(0);
 }
 
 void Timer(const char *tag, const std::function<void()> &kernel,
-               int test_time = 3) {
+               int test_time = TIMES) {
   float min_time = 9e99;
   for (int i = 0; i < test_time; ++i) {
     cudaEvent_t beg, end;
@@ -243,16 +233,12 @@ void GEMM_wmma(int M,int N,int K,TIN *a_in,TIN *b_in,TOUT *c_out){
    const int N_PAD = PAD(N,N_TILE) ;
    const int K_PAD = PAD(K,K_TILE) ;
 
-   cuda_vector<TGEMMIN> a(M_PAD*K_PAD),b(K_PAD*N_PAD);
-   cuda_vector<TGEMMOUT> c(M_PAD*N_PAD);
+   cuda_data<TGEMMIN> a(M_PAD*K_PAD),b(K_PAD*N_PAD);
+   cuda_data<TGEMMOUT> c(M_PAD*N_PAD);
 
    //init a b
-   gemm_copy<TIN,TGEMMIN,ARR2VECTOR>(M,K,a_in,M_PAD,K_PAD,a);
-   gemm_copy<TIN,TGEMMIN,ARR2VECTOR>(K,N,b_in,K_PAD,N_PAD,b);
-
-   // sync to device
-   a.sync_device();
-   b.sync_device();
+   copy<TIN,TGEMMIN,ARR2CUARR>(M,K,a_in,M_PAD,K_PAD,a);
+   copy<TIN,TGEMMIN,ARR2CUARR>(K,N,b_in,K_PAD,N_PAD,b);
 
    int GRID_DIM,BLOCK_DIM,nwarp;
    nwarp = (M_PAD/M_TILE) * (N_PAD/N_TILE);
@@ -267,12 +253,10 @@ void GEMM_wmma(int M,int N,int K,TIN *a_in,TIN *b_in,TOUT *c_out){
    printf("GRID_DIM:%d BLOCK_DIM:%d\n",GRID_DIM,BLOCK_DIM);
    Timer("gemm_gty_wmma", [&]{
    wmma_kernel<TGEMMIN,TGEMMOUT,M_TILE,N_TILE,K_TILE>
-      <<<GRID_DIM,BLOCK_DIM>>>(a.device_data,b.device_data,c.device_data,
+      <<<GRID_DIM,BLOCK_DIM>>>(a.data,b.data,c.data,
             M_PAD,N_PAD,K_PAD);});
 
-   c.sync_host();
-
-   gemm_copy<TOUT,TGEMMOUT,VECTOR2ARR>(M,N,c_out,M_PAD,N_PAD,c);
+   copy<TOUT,TGEMMOUT,CUARR2ARR>(M,N,c_out,M_PAD,N_PAD,c);
 }
 
 template <typename TIN, typename TOUT,
@@ -285,16 +269,12 @@ void GEMM_bmma(int M,int N,int K,TIN *a_in,TIN *b_in,TOUT *c_out){
    const int N_PAD = PAD(N,N_TILE) ;
    const int K_PAD = PAD(K,K_TILE) ;
 
-   cuda_vector<TGEMMIN> a(M_PAD*K_PAD),b(K_PAD*N_PAD);
-   cuda_vector<TGEMMOUT> c(M_PAD*N_PAD);
+   cuda_data<TGEMMIN> a(M_PAD*K_PAD),b(K_PAD*N_PAD);
+   cuda_data<TGEMMOUT> c(M_PAD*N_PAD);
 
    //init a b
-   gemm_copy<TIN,TGEMMIN,ARR2VECTOR>(M,K,a_in,M_PAD,K_PAD,a);
-   gemm_copy<TIN,TGEMMIN,ARR2VECTOR>(K,N,b_in,K_PAD,N_PAD,b);
-
-   // sync to device
-   a.sync_device();
-   b.sync_device();
+   copy<TIN,TGEMMIN,ARR2CUARR>(M,K,a_in,M_PAD,K_PAD,a);
+   copy<TIN,TGEMMIN,ARR2CUARR>(K,N,b_in,K_PAD,N_PAD,b);
 
    int GRID_DIM,BLOCK_DIM;
    GRID_DIM = (M_PAD/M_TILE) * (N_PAD/N_TILE);
@@ -303,35 +283,27 @@ void GEMM_bmma(int M,int N,int K,TIN *a_in,TIN *b_in,TOUT *c_out){
 
    Timer("gemm_gty_bmma", [&]{
    bmma_kernel<TGEMMIN,TGEMMOUT,M_TILE,N_TILE,K_TILE>
-      <<<GRID_DIM,BLOCK_DIM>>>(a.device_data,b.device_data,c.device_data,
+      <<<GRID_DIM,BLOCK_DIM>>>(a.data,b.data,c.data,
          M_PAD,N_PAD,K_PAD);});
 
-   c.sync_host();
-
-   gemm_copy<TOUT,TGEMMOUT,VECTOR2ARR>(M,N,c_out,M_PAD,N_PAD,c);
+   copy<TOUT,TGEMMOUT,CUARR2ARR>(M,N,c_out,M_PAD,N_PAD,c);
 }
 
 template <typename TIN, typename TOUT>
 void GEMM_cutlass(int M,int N,int K,TIN *a_in,TIN *b_in,TOUT *c_out){
    assert(M!=0 && N!=0 && K!=0);
 
-   cuda_vector<TIN> a(M*K),b(K*N);
-   cuda_vector<TOUT> c(M*N);
+   cuda_data<TIN> a(M*K),b(K*N);
+   cuda_data<TOUT> c(M*N);
 
    //init a b
-   gemm_copy<TIN,TIN,ARR2VECTOR>(M,K,a_in,M,K,a);
-   gemm_copy<TIN,TIN,ARR2VECTOR>(K,N,b_in,K,N,b);
-
-   // sync to device
-   a.sync_device();
-   b.sync_device();
+   copy<TIN,TIN,ARR2CUARR>(M,K,a_in,M,K,a);
+   copy<TIN,TIN,ARR2CUARR>(K,N,b_in,K,N,b);
 
    Timer("gemm_cutlass", [&]{
-      CutlassSgemmNN(M,N,K,1.0,a.device_data,K,b.device_data,N,0.0,c.device_data,N);});
+      CutlassSgemmNN(M,N,K,1.0,a.data,K,b.data,N,0.0,c.data,N);});
 
-   c.sync_host();
-
-   gemm_copy<TOUT,TOUT,VECTOR2ARR>(M,N,c_out,M,N,c);
+   copy<TOUT,TOUT,CUARR2ARR>(M,N,c_out,M,N,c);
 }
 
 
@@ -392,7 +364,6 @@ void benchmark(int M,int N,int K,bool ifcheck){
 }
 
 int main(){
-
    int args1[] = {512,1024,2048,4096,8192};
    for(auto arg:args1){
       benchmark<float,float>(arg,arg,arg,1);

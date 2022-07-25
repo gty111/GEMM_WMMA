@@ -45,8 +45,6 @@ $$
 
 ```shell
 make CUTLASS_DIR=your_cutlass_dir ARCH=your_arch NAME=gemm run
-make CUTLASS_DIR=your_cutlass_dir ARCH=your_arch NAME=gemm_wmma run
-make CUTLASS_DIR=your_cutlass_dir ARCH=your_arch NAME=gemm_bmma run
 ```
 
 或直接修改Makefile后运行
@@ -55,3 +53,8 @@ make CUTLASS_DIR=your_cutlass_dir ARCH=your_arch NAME=gemm_bmma run
 make run
 ```
 
+## Log
+
+|time|content|
+|--|--|
+|2022-7-25|use unify memory for cuda_data|

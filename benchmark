@@ -1,0 +1,300 @@
+----------------
+M:512 N:512 K:512
+GRID_DIM:1024 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 3.825664 ms elapsed, 3.825664 ms min.
+[gemm_gty_bmma] iter 1: 0.108544 ms elapsed, 0.108544 ms min.
+[gemm_gty_bmma] iter 2: 0.107520 ms elapsed, 0.107520 ms min.
+[gemm_gty_bmma] iter 3: 0.108544 ms elapsed, 0.107520 ms min.
+[gemm_gty_bmma] iter 4: 0.107520 ms elapsed, 0.107520 ms min.
+GRID_DIM:64 BLOCK_DIM:512
+[gemm_gty_wmma] iter 0: 3.105792 ms elapsed, 3.105792 ms min.
+[gemm_gty_wmma] iter 1: 0.057344 ms elapsed, 0.057344 ms min.
+[gemm_gty_wmma] iter 2: 0.057344 ms elapsed, 0.057344 ms min.
+[gemm_gty_wmma] iter 3: 0.056320 ms elapsed, 0.056320 ms min.
+[gemm_gty_wmma] iter 4: 0.056320 ms elapsed, 0.056320 ms min.
+[gemm_cutlass] iter 0: 2.448384 ms elapsed, 2.448384 ms min.
+[gemm_cutlass] iter 1: 0.200704 ms elapsed, 0.200704 ms min.
+[gemm_cutlass] iter 2: 0.199680 ms elapsed, 0.199680 ms min.
+[gemm_cutlass] iter 3: 0.199680 ms elapsed, 0.199680 ms min.
+[gemm_cutlass] iter 4: 0.199680 ms elapsed, 0.199680 ms min.
+check pass
+----------------
+M:1024 N:1024 K:1024
+GRID_DIM:4096 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 9.604096 ms elapsed, 9.604096 ms min.
+[gemm_gty_bmma] iter 1: 0.497664 ms elapsed, 0.497664 ms min.
+[gemm_gty_bmma] iter 2: 0.496640 ms elapsed, 0.496640 ms min.
+[gemm_gty_bmma] iter 3: 0.496640 ms elapsed, 0.496640 ms min.
+[gemm_gty_bmma] iter 4: 0.495616 ms elapsed, 0.495616 ms min.
+GRID_DIM:256 BLOCK_DIM:512
+[gemm_gty_wmma] iter 0: 8.498176 ms elapsed, 8.498176 ms min.
+[gemm_gty_wmma] iter 1: 0.288768 ms elapsed, 0.288768 ms min.
+[gemm_gty_wmma] iter 2: 0.287744 ms elapsed, 0.287744 ms min.
+[gemm_gty_wmma] iter 3: 0.287744 ms elapsed, 0.287744 ms min.
+[gemm_gty_wmma] iter 4: 0.287744 ms elapsed, 0.287744 ms min.
+[gemm_cutlass] iter 0: 9.626624 ms elapsed, 9.626624 ms min.
+[gemm_cutlass] iter 1: 0.386048 ms elapsed, 0.386048 ms min.
+[gemm_cutlass] iter 2: 0.386048 ms elapsed, 0.386048 ms min.
+[gemm_cutlass] iter 3: 0.386048 ms elapsed, 0.386048 ms min.
+[gemm_cutlass] iter 4: 0.386048 ms elapsed, 0.386048 ms min.
+check pass
+----------------
+M:2048 N:2048 K:2048
+GRID_DIM:16384 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 41.716736 ms elapsed, 41.716736 ms min.
+[gemm_gty_bmma] iter 1: 2.861056 ms elapsed, 2.861056 ms min.
+[gemm_gty_bmma] iter 2: 2.859008 ms elapsed, 2.859008 ms min.
+[gemm_gty_bmma] iter 3: 2.859008 ms elapsed, 2.859008 ms min.
+[gemm_gty_bmma] iter 4: 2.860032 ms elapsed, 2.859008 ms min.
+GRID_DIM:1024 BLOCK_DIM:512
+[gemm_gty_wmma] iter 0: 32.962559 ms elapsed, 32.962559 ms min.
+[gemm_gty_wmma] iter 1: 1.851392 ms elapsed, 1.851392 ms min.
+[gemm_gty_wmma] iter 2: 1.844224 ms elapsed, 1.844224 ms min.
+[gemm_gty_wmma] iter 3: 1.845248 ms elapsed, 1.844224 ms min.
+[gemm_gty_wmma] iter 4: 1.844224 ms elapsed, 1.844224 ms min.
+[gemm_cutlass] iter 0: 32.433151 ms elapsed, 32.433151 ms min.
+[gemm_cutlass] iter 1: 2.242560 ms elapsed, 2.242560 ms min.
+[gemm_cutlass] iter 2: 2.242560 ms elapsed, 2.242560 ms min.
+[gemm_cutlass] iter 3: 2.242560 ms elapsed, 2.242560 ms min.
+[gemm_cutlass] iter 4: 2.241536 ms elapsed, 2.241536 ms min.
+check pass
+----------------
+M:4096 N:4096 K:4096
+GRID_DIM:65536 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 127.719421 ms elapsed, 127.719421 ms min.
+[gemm_gty_bmma] iter 1: 18.780161 ms elapsed, 18.780161 ms min.
+[gemm_gty_bmma] iter 2: 18.780161 ms elapsed, 18.780161 ms min.
+[gemm_gty_bmma] iter 3: 18.781183 ms elapsed, 18.780161 ms min.
+[gemm_gty_bmma] iter 4: 18.776064 ms elapsed, 18.776064 ms min.
+GRID_DIM:4096 BLOCK_DIM:512
+[gemm_gty_wmma] iter 0: 93.248512 ms elapsed, 93.248512 ms min.
+[gemm_gty_wmma] iter 1: 14.294016 ms elapsed, 14.294016 ms min.
+[gemm_gty_wmma] iter 2: 14.302208 ms elapsed, 14.294016 ms min.
+[gemm_gty_wmma] iter 3: 14.308352 ms elapsed, 14.294016 ms min.
+[gemm_gty_wmma] iter 4: 14.304256 ms elapsed, 14.294016 ms min.
+[gemm_cutlass] iter 0: 105.491455 ms elapsed, 105.491455 ms min.
+[gemm_cutlass] iter 1: 14.833664 ms elapsed, 14.833664 ms min.
+[gemm_cutlass] iter 2: 14.831616 ms elapsed, 14.831616 ms min.
+[gemm_cutlass] iter 3: 14.831616 ms elapsed, 14.831616 ms min.
+[gemm_cutlass] iter 4: 14.831616 ms elapsed, 14.831616 ms min.
+check pass
+----------------
+M:8192 N:8192 K:8192
+GRID_DIM:262144 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 514.538513 ms elapsed, 514.538513 ms min.
+[gemm_gty_bmma] iter 1: 132.470779 ms elapsed, 132.470779 ms min.
+[gemm_gty_bmma] iter 2: 132.470779 ms elapsed, 132.470779 ms min.
+[gemm_gty_bmma] iter 3: 132.469757 ms elapsed, 132.469757 ms min.
+[gemm_gty_bmma] iter 4: 132.469757 ms elapsed, 132.469757 ms min.
+GRID_DIM:16384 BLOCK_DIM:512
+[gemm_gty_wmma] iter 0: 253.488129 ms elapsed, 253.488129 ms min.
+[gemm_gty_wmma] iter 1: 111.308800 ms elapsed, 111.308800 ms min.
+[gemm_gty_wmma] iter 2: 111.367165 ms elapsed, 111.308800 ms min.
+[gemm_gty_wmma] iter 3: 111.350784 ms elapsed, 111.308800 ms min.
+[gemm_gty_wmma] iter 4: 111.324158 ms elapsed, 111.308800 ms min.
+[gemm_cutlass] iter 0: 331.235321 ms elapsed, 331.235321 ms min.
+[gemm_cutlass] iter 1: 112.492546 ms elapsed, 112.492546 ms min.
+[gemm_cutlass] iter 2: 112.492546 ms elapsed, 112.492546 ms min.
+[gemm_cutlass] iter 3: 112.483330 ms elapsed, 112.483330 ms min.
+[gemm_cutlass] iter 4: 112.490494 ms elapsed, 112.483330 ms min.
+check pass
+----------------
+M:512 N:512 K:32
+GRID_DIM:1024 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 1.938432 ms elapsed, 1.938432 ms min.
+[gemm_gty_bmma] iter 1: 0.078848 ms elapsed, 0.078848 ms min.
+[gemm_gty_bmma] iter 2: 0.077824 ms elapsed, 0.077824 ms min.
+[gemm_gty_bmma] iter 3: 0.076800 ms elapsed, 0.076800 ms min.
+[gemm_gty_bmma] iter 4: 0.077824 ms elapsed, 0.076800 ms min.
+GRID_DIM:64 BLOCK_DIM:512
+[gemm_gty_wmma] iter 0: 2.220032 ms elapsed, 2.220032 ms min.
+[gemm_gty_wmma] iter 1: 0.014336 ms elapsed, 0.014336 ms min.
+[gemm_gty_wmma] iter 2: 0.013312 ms elapsed, 0.013312 ms min.
+[gemm_gty_wmma] iter 3: 0.013312 ms elapsed, 0.013312 ms min.
+[gemm_gty_wmma] iter 4: 0.013312 ms elapsed, 0.013312 ms min.
+[gemm_cutlass] iter 0: 1.495040 ms elapsed, 1.495040 ms min.
+[gemm_cutlass] iter 1: 0.027648 ms elapsed, 0.027648 ms min.
+[gemm_cutlass] iter 2: 0.026624 ms elapsed, 0.026624 ms min.
+[gemm_cutlass] iter 3: 0.026624 ms elapsed, 0.026624 ms min.
+[gemm_cutlass] iter 4: 0.025600 ms elapsed, 0.025600 ms min.
+check pass
+----------------
+M:1024 N:1024 K:32
+GRID_DIM:4096 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 4.533248 ms elapsed, 4.533248 ms min.
+[gemm_gty_bmma] iter 1: 0.266240 ms elapsed, 0.266240 ms min.
+[gemm_gty_bmma] iter 2: 0.265216 ms elapsed, 0.265216 ms min.
+[gemm_gty_bmma] iter 3: 0.265216 ms elapsed, 0.265216 ms min.
+[gemm_gty_bmma] iter 4: 0.265216 ms elapsed, 0.265216 ms min.
+GRID_DIM:256 BLOCK_DIM:512
+[gemm_gty_wmma] iter 0: 4.306944 ms elapsed, 4.306944 ms min.
+[gemm_gty_wmma] iter 1: 0.021504 ms elapsed, 0.021504 ms min.
+[gemm_gty_wmma] iter 2: 0.019456 ms elapsed, 0.019456 ms min.
+[gemm_gty_wmma] iter 3: 0.020480 ms elapsed, 0.019456 ms min.
+[gemm_gty_wmma] iter 4: 0.020480 ms elapsed, 0.019456 ms min.
+[gemm_cutlass] iter 0: 4.114432 ms elapsed, 4.114432 ms min.
+[gemm_cutlass] iter 1: 0.028672 ms elapsed, 0.028672 ms min.
+[gemm_cutlass] iter 2: 0.026624 ms elapsed, 0.026624 ms min.
+[gemm_cutlass] iter 3: 0.026624 ms elapsed, 0.026624 ms min.
+[gemm_cutlass] iter 4: 0.026624 ms elapsed, 0.026624 ms min.
+check pass
+----------------
+M:2048 N:2048 K:32
+GRID_DIM:16384 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 17.046528 ms elapsed, 17.046528 ms min.
+[gemm_gty_bmma] iter 1: 1.029120 ms elapsed, 1.029120 ms min.
+[gemm_gty_bmma] iter 2: 1.028096 ms elapsed, 1.028096 ms min.
+[gemm_gty_bmma] iter 3: 1.028096 ms elapsed, 1.028096 ms min.
+[gemm_gty_bmma] iter 4: 1.028096 ms elapsed, 1.028096 ms min.
+GRID_DIM:1024 BLOCK_DIM:512
+[gemm_gty_wmma] iter 0: 14.417920 ms elapsed, 14.417920 ms min.
+[gemm_gty_wmma] iter 1: 0.041984 ms elapsed, 0.041984 ms min.
+[gemm_gty_wmma] iter 2: 0.041984 ms elapsed, 0.041984 ms min.
+[gemm_gty_wmma] iter 3: 0.041984 ms elapsed, 0.041984 ms min.
+[gemm_gty_wmma] iter 4: 0.041984 ms elapsed, 0.041984 ms min.
+[gemm_cutlass] iter 0: 10.020864 ms elapsed, 10.020864 ms min.
+[gemm_cutlass] iter 1: 0.063488 ms elapsed, 0.063488 ms min.
+[gemm_cutlass] iter 2: 0.063488 ms elapsed, 0.063488 ms min.
+[gemm_cutlass] iter 3: 0.063488 ms elapsed, 0.063488 ms min.
+[gemm_cutlass] iter 4: 0.063488 ms elapsed, 0.063488 ms min.
+check pass
+----------------
+M:4096 N:4096 K:32
+GRID_DIM:65536 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 70.324226 ms elapsed, 70.324226 ms min.
+[gemm_gty_bmma] iter 1: 4.075520 ms elapsed, 4.075520 ms min.
+[gemm_gty_bmma] iter 2: 4.073472 ms elapsed, 4.073472 ms min.
+[gemm_gty_bmma] iter 3: 4.074496 ms elapsed, 4.073472 ms min.
+[gemm_gty_bmma] iter 4: 4.074496 ms elapsed, 4.073472 ms min.
+GRID_DIM:4096 BLOCK_DIM:512
+[gemm_gty_wmma] iter 0: 41.605122 ms elapsed, 41.605122 ms min.
+[gemm_gty_wmma] iter 1: 0.131072 ms elapsed, 0.131072 ms min.
+[gemm_gty_wmma] iter 2: 0.129024 ms elapsed, 0.129024 ms min.
+[gemm_gty_wmma] iter 3: 0.130048 ms elapsed, 0.129024 ms min.
+[gemm_gty_wmma] iter 4: 0.130048 ms elapsed, 0.129024 ms min.
+[gemm_cutlass] iter 0: 28.778496 ms elapsed, 28.778496 ms min.
+[gemm_cutlass] iter 1: 0.194560 ms elapsed, 0.194560 ms min.
+[gemm_cutlass] iter 2: 0.193536 ms elapsed, 0.193536 ms min.
+[gemm_cutlass] iter 3: 0.194560 ms elapsed, 0.193536 ms min.
+[gemm_cutlass] iter 4: 0.193536 ms elapsed, 0.193536 ms min.
+check pass
+----------------
+M:8192 N:8192 K:32
+GRID_DIM:262144 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 186.276871 ms elapsed, 186.276871 ms min.
+[gemm_gty_bmma] iter 1: 16.259071 ms elapsed, 16.259071 ms min.
+[gemm_gty_bmma] iter 2: 16.258047 ms elapsed, 16.258047 ms min.
+[gemm_gty_bmma] iter 3: 16.258047 ms elapsed, 16.258047 ms min.
+[gemm_gty_bmma] iter 4: 16.258047 ms elapsed, 16.258047 ms min.
+GRID_DIM:16384 BLOCK_DIM:512
+[gemm_gty_wmma] iter 0: 92.066818 ms elapsed, 92.066818 ms min.
+[gemm_gty_wmma] iter 1: 0.480256 ms elapsed, 0.480256 ms min.
+[gemm_gty_wmma] iter 2: 0.479232 ms elapsed, 0.479232 ms min.
+[gemm_gty_wmma] iter 3: 0.478208 ms elapsed, 0.478208 ms min.
+[gemm_gty_wmma] iter 4: 0.479232 ms elapsed, 0.478208 ms min.
+[gemm_cutlass] iter 0: 58.735615 ms elapsed, 58.735615 ms min.
+[gemm_cutlass] iter 1: 0.701440 ms elapsed, 0.701440 ms min.
+[gemm_cutlass] iter 2: 0.699392 ms elapsed, 0.699392 ms min.
+[gemm_cutlass] iter 3: 0.698368 ms elapsed, 0.698368 ms min.
+[gemm_cutlass] iter 4: 0.698368 ms elapsed, 0.698368 ms min.
+check pass
+----------------
+M:16 N:16 K:5120
+GRID_DIM:1 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 0.585728 ms elapsed, 0.585728 ms min.
+[gemm_gty_bmma] iter 1: 0.051200 ms elapsed, 0.051200 ms min.
+[gemm_gty_bmma] iter 2: 0.051200 ms elapsed, 0.051200 ms min.
+[gemm_gty_bmma] iter 3: 0.050176 ms elapsed, 0.050176 ms min.
+[gemm_gty_bmma] iter 4: 0.050176 ms elapsed, 0.050176 ms min.
+GRID_DIM:1 BLOCK_DIM:32
+[gemm_gty_wmma] iter 0: 0.688128 ms elapsed, 0.688128 ms min.
+[gemm_gty_wmma] iter 1: 0.118784 ms elapsed, 0.118784 ms min.
+[gemm_gty_wmma] iter 2: 0.118784 ms elapsed, 0.118784 ms min.
+[gemm_gty_wmma] iter 3: 0.117760 ms elapsed, 0.117760 ms min.
+[gemm_gty_wmma] iter 4: 0.118784 ms elapsed, 0.117760 ms min.
+[gemm_cutlass] iter 0: 2.556928 ms elapsed, 2.556928 ms min.
+[gemm_cutlass] iter 1: 1.859584 ms elapsed, 1.859584 ms min.
+[gemm_cutlass] iter 2: 1.854464 ms elapsed, 1.854464 ms min.
+[gemm_cutlass] iter 3: 1.854464 ms elapsed, 1.854464 ms min.
+[gemm_cutlass] iter 4: 1.855488 ms elapsed, 1.854464 ms min.
+check pass
+----------------
+M:16 N:16 K:10240
+GRID_DIM:1 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 0.758784 ms elapsed, 0.758784 ms min.
+[gemm_gty_bmma] iter 1: 0.086016 ms elapsed, 0.086016 ms min.
+[gemm_gty_bmma] iter 2: 0.083968 ms elapsed, 0.083968 ms min.
+[gemm_gty_bmma] iter 3: 0.082944 ms elapsed, 0.082944 ms min.
+[gemm_gty_bmma] iter 4: 0.083968 ms elapsed, 0.082944 ms min.
+GRID_DIM:1 BLOCK_DIM:32
+[gemm_gty_wmma] iter 0: 0.991232 ms elapsed, 0.991232 ms min.
+[gemm_gty_wmma] iter 1: 0.228352 ms elapsed, 0.228352 ms min.
+[gemm_gty_wmma] iter 2: 0.227328 ms elapsed, 0.227328 ms min.
+[gemm_gty_wmma] iter 3: 0.227328 ms elapsed, 0.227328 ms min.
+[gemm_gty_wmma] iter 4: 0.227328 ms elapsed, 0.227328 ms min.
+[gemm_cutlass] iter 0: 4.825088 ms elapsed, 4.825088 ms min.
+[gemm_cutlass] iter 1: 3.696640 ms elapsed, 3.696640 ms min.
+[gemm_cutlass] iter 2: 3.695616 ms elapsed, 3.695616 ms min.
+[gemm_cutlass] iter 3: 3.695616 ms elapsed, 3.695616 ms min.
+[gemm_cutlass] iter 4: 3.693568 ms elapsed, 3.693568 ms min.
+check pass
+----------------
+M:16 N:16 K:20480
+GRID_DIM:1 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 1.250304 ms elapsed, 1.250304 ms min.
+[gemm_gty_bmma] iter 1: 0.152576 ms elapsed, 0.152576 ms min.
+[gemm_gty_bmma] iter 2: 0.152576 ms elapsed, 0.152576 ms min.
+[gemm_gty_bmma] iter 3: 0.152576 ms elapsed, 0.152576 ms min.
+[gemm_gty_bmma] iter 4: 0.151552 ms elapsed, 0.151552 ms min.
+GRID_DIM:1 BLOCK_DIM:32
+[gemm_gty_wmma] iter 0: 1.709056 ms elapsed, 1.709056 ms min.
+[gemm_gty_wmma] iter 1: 0.444416 ms elapsed, 0.444416 ms min.
+[gemm_gty_wmma] iter 2: 0.444416 ms elapsed, 0.444416 ms min.
+[gemm_gty_wmma] iter 3: 0.444416 ms elapsed, 0.444416 ms min.
+[gemm_gty_wmma] iter 4: 0.444416 ms elapsed, 0.444416 ms min.
+[gemm_cutlass] iter 0: 9.958400 ms elapsed, 9.958400 ms min.
+[gemm_cutlass] iter 1: 7.376896 ms elapsed, 7.376896 ms min.
+[gemm_cutlass] iter 2: 7.375872 ms elapsed, 7.375872 ms min.
+[gemm_cutlass] iter 3: 7.373824 ms elapsed, 7.373824 ms min.
+[gemm_cutlass] iter 4: 7.373824 ms elapsed, 7.373824 ms min.
+check pass
+----------------
+M:16 N:16 K:40960
+GRID_DIM:1 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 2.509824 ms elapsed, 2.509824 ms min.
+[gemm_gty_bmma] iter 1: 0.287744 ms elapsed, 0.287744 ms min.
+[gemm_gty_bmma] iter 2: 0.287744 ms elapsed, 0.287744 ms min.
+[gemm_gty_bmma] iter 3: 0.287744 ms elapsed, 0.287744 ms min.
+[gemm_gty_bmma] iter 4: 0.287744 ms elapsed, 0.287744 ms min.
+GRID_DIM:1 BLOCK_DIM:32
+[gemm_gty_wmma] iter 0: 3.352576 ms elapsed, 3.352576 ms min.
+[gemm_gty_wmma] iter 1: 0.877568 ms elapsed, 0.877568 ms min.
+[gemm_gty_wmma] iter 2: 0.877568 ms elapsed, 0.877568 ms min.
+[gemm_gty_wmma] iter 3: 0.877568 ms elapsed, 0.877568 ms min.
+[gemm_gty_wmma] iter 4: 0.877568 ms elapsed, 0.877568 ms min.
+[gemm_cutlass] iter 0: 18.299904 ms elapsed, 18.299904 ms min.
+[gemm_cutlass] iter 1: 14.736384 ms elapsed, 14.736384 ms min.
+[gemm_cutlass] iter 2: 14.735360 ms elapsed, 14.735360 ms min.
+[gemm_cutlass] iter 3: 14.735360 ms elapsed, 14.735360 ms min.
+[gemm_cutlass] iter 4: 14.734336 ms elapsed, 14.734336 ms min.
+check pass
+----------------
+M:16 N:16 K:81920
+GRID_DIM:1 BLOCK_DIM:512
+[gemm_gty_bmma] iter 0: 3.883008 ms elapsed, 3.883008 ms min.
+[gemm_gty_bmma] iter 1: 0.561152 ms elapsed, 0.561152 ms min.
+[gemm_gty_bmma] iter 2: 0.560128 ms elapsed, 0.560128 ms min.
+[gemm_gty_bmma] iter 3: 0.559104 ms elapsed, 0.559104 ms min.
+[gemm_gty_bmma] iter 4: 0.560128 ms elapsed, 0.559104 ms min.
+GRID_DIM:1 BLOCK_DIM:32
+[gemm_gty_wmma] iter 0: 5.875712 ms elapsed, 5.875712 ms min.
+[gemm_gty_wmma] iter 1: 1.750016 ms elapsed, 1.750016 ms min.
+[gemm_gty_wmma] iter 2: 1.751040 ms elapsed, 1.750016 ms min.
+[gemm_gty_wmma] iter 3: 1.748992 ms elapsed, 1.748992 ms min.
+[gemm_gty_wmma] iter 4: 1.748992 ms elapsed, 1.748992 ms min.
+[gemm_cutlass] iter 0: 35.758080 ms elapsed, 35.758080 ms min.
+[gemm_cutlass] iter 1: 29.458431 ms elapsed, 29.458431 ms min.
+[gemm_cutlass] iter 2: 29.455360 ms elapsed, 29.455360 ms min.
+[gemm_cutlass] iter 3: 29.457409 ms elapsed, 29.455360 ms min.
+[gemm_cutlass] iter 4: 29.455360 ms elapsed, 29.455360 ms min.
+check pass
